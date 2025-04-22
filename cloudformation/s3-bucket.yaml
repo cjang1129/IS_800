@@ -1,9 +1,12 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Resources:
   MyS3Bucket:
-    Type: AWS::S3::Bucket
+    Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: cj-cloudformation-example-is800-6472 # Ensure unique name
+      BucketName: cj-cloudformation-example-is800-6472-v2 # Ensure unique name
+      PublicAccessBlockConfiguration:
+        BlockPublicPolicy: false
+        RestrictPublicBuckets: false
 
   S3BucketPolicy:
     Type: AWS::S3::BucketPolicy
