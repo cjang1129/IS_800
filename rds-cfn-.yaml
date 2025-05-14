@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: Sample CloudFormation template with YAML - RDS Definition
+
+Parameters:
+  StackName:
+    Description: Target VPC Stack Name
+    Type: String
+    MinLength: 1
+    MaxLength: 255
+    AllowedPattern: ^[a-zA-Z][-a-zA-Z0-9]*$
+    Default: SampleCloudFormationVPC
+
+  RdsUser:
+    Description: Database Master User Name
+    Type: String
+    Default: DBAdmin
+
+  RdsPassword:
+    Description: Database Master User Password
+    Type: String
+    Default: ABC123Rndom1990
+
+Resources:
+  SampleCloudFormationRDSInstance:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Snapshot
+    Properties:
+      DBInstanceIdentifier: sample-cloudformation-MySQL
+      DBName: SampleCloudFormationMySQL
+      Engine: MySQL
+      MultiAZ: false
+      MasterUsername: !Ref RdsUser
+      MasterUserPassword: !Ref RdsPassword
+      DBInstanceClass: db.t3.small
+      AllocatedStorage: '5'
+
+Outputs:
+  SampleCloudFormationRDSInstance:
+    Description: RDS
+    Value: !Ref SampleCloudFormationRDSInstance
+    Export:
+      Name: !Sub ${StackName}-RDS
+
+  SampleCloudFormationRDSInstanceEndPoint:
+    Description: RDS
+    Value: !GetAtt SampleCloudFormationRDSInstance.Endpoint.Address
+    Export:
+      Name: !Sub ${StackName}-RDSEndpoint
