@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-08b5b3a93ed654d19  # Update with a valid AMI ID for your region
+      KeyName: firstkey  # Replace with an existing key pair
+      Tags:
+        - Key: Name
+          Value: CloudFormation-EC2
