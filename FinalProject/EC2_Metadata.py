@@ -3,10 +3,10 @@ import boto3
 client = boto3.client('ec2')
 response = client.describe_instances()
 
-//prints metadata//
+[//]: # (prints metadata) 
 print(response)
 
-//shows instance ids //
+[//]: # (shows instance Ids) 
 
 for instance in response['Reservations']:
     for instance in instance['Instances']:
